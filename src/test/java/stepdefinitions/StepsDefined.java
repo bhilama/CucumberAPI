@@ -2,7 +2,7 @@ package stepdefinitions;
 
 import static io.restassured.RestAssured.given;
 
-import java.io.FileNotFoundException;
+import java.io.IOException;
 
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -23,8 +23,8 @@ public class StepsDefined extends Utils {
 	LoginResponse loginResponse;
 	Response resp;
 
-	@Given("^I have username ([^\"]*) and password ([^\"]*)$")
-	public void i_have_username_infy_maheshb_gmail_com(String userID, String password) throws FileNotFoundException {
+	@Given("I have username {string} and password {string}")
+	public void i_have_username_infy_maheshb_gmail_com(String userID, String password) throws IOException {
 		
 		reqLogin = given().spec(requestSpecification()).contentType(ContentType.JSON).body(payloadData.getLoginPayload(userID, password));
 		System.out.println("I have username " + userID);
