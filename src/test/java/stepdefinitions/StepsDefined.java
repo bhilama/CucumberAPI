@@ -13,6 +13,7 @@ import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 import pojo.LoginRequest;
 import pojo.LoginResponse;
+import resources.APIResources;
 import resources.PayLoadData;
 import resources.Utils;
 
@@ -31,10 +32,12 @@ public class StepsDefined extends Utils {
 		
 	}
 	
-	@When("I send post request")
-	public void i_send_post_request() {
+	@When("I send {string} post request")
+	public void i_send_post_request(String resource) {
 		
-		resp = reqLogin.when().post("/api/ecom/auth/login").then().extract().response();
+		APIResources resourceAPI = APIResources.valueOf(resource);
+		
+		resp = reqLogin.when().post(resourceAPI.getResource()).then().extract().response();
 		System.out.println("I send post request");
 	}
 	@Then("I get {string} in response")
